@@ -1,6 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from rest_framework import viewsets
 
-# a function that returns an HTML view of the home page using HttpResponse
-def index(request):
-    return HttpResponse("<h1>Social Scheduler</h1>")
+from .serializers import MediaSerializer
+from .models import Media
+
+class MediaViewSet(viewsets.ModelViewSet):
+    queryset = Media.objects.all().order_by('user_id')
+    serializer_class = MediaSerializer
+    
