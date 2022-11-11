@@ -31,11 +31,11 @@ def post_to_instagram(result):
         print('Error occured while posting to Instagram')
 
 
-def postToInstagram(img_uri, caption):
+def share_post_to_instagram(img_uri, caption):
     post_container = create_ig_container(img_uri, caption)
     post_to_instagram(post_container)
     
 
 
-postToInstagram('https://lydian.ai/static/al-4cfca7b6bb6dc53302a7087752ecbb4f.jpg', 'test')
+# share_post_to_instagram('https://1d48-71-83-117-239.ngrok.io/media/media/bloops_MPk6c3W.jpg', 'test')
 # a function to post an image to instagram
