@@ -1,2 +1,3 @@
 mediafiles/
 .DS_Store
+/server/.env

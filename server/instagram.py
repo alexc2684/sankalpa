@@ -1,10 +1,15 @@
 import requests
 import json
+import environ
 
-INSTA_BIZ_ID = '17841445917209667'
-USER_ACCESS_TOKEN = 'EAAJgonltJHcBAOAA2K02vQ4Ckb16nqQyfYZBVSsZBcKOhsgQ6FfZClrishSMTtLGXQ9FSLUi4AHmfppySuLyVmxagyxmWBsmokWxBWTKwkZARB8iU4iIqJJqZAiQ33bEZADm9pGH594cNe9ZCQRKZB8a3SZAMmi2BxQcePZB3wfw65wOwXZAB3x5N1hTYOhE6lszZAoZD'
+env = environ.Env()
 
-def create_ig_container(img_uri, caption):
+environ.Env.read_env()
+
+INSTA_BIZ_ID = env('INSTA_BIZ_ID')
+USER_ACCESS_TOKEN = env('USER_ACCESS_TOKEN')
+
+def create_instagram_container(img_uri, caption):
     post_url = 'https://graph.facebook.com/v15.0/{}/media'.format(INSTA_BIZ_ID)
     payload = {
         'image_url': img_uri,
@@ -32,10 +37,7 @@ def post_to_instagram(result):
 
 
 def share_post_to_instagram(img_uri, caption):
-    post_container = create_ig_container(img_uri, caption)
-    post_to_instagram(post_container)
-    
-
-
-# share_post_to_instagram('https://1d48-71-83-117-239.ngrok.io/media/media/bloops_MPk6c3W.jpg', 'test')
-# a function to post an image to instagram
+  print('--------Sharing post to Instagram--------')
+  post_container = create_instagram_container(img_uri, caption)
+  post_to_instagram(post_container)
+  print('--------Post successfully shared--------')
