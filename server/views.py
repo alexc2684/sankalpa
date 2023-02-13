@@ -15,6 +15,18 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('user_id')
     serializer_class = PostSerializer
 
+    def create(self, request, *args, **kwargs):
+      serializer = self.get_serializer(data=request.data)
+      serializer.is_valid(raise_exception=True)
+      self.perform_create(serializer)
+      headers = self.get_success_headers(serializer.data)
+
+      return Response(
+          {'id': serializer.data.get('request_id')},
+          status=status.HTTP_201_CREATED, 
+          headers=headers
+      )
+
 # An API that takes a url and posts it to instagram
 @api_view(['POST'])
 def post_to_instagram(request):
@@ -28,4 +40,4 @@ def post_to_instagram(request):
 @api_view(['GET'])
 def start_scheduler(request):
   start_instagram_scheduler()
-  return Response({'message': 'success'}, status=status.HTTP_200_OK)
+  # return Response({'message': 'success'}, status=status.HTTP_200_OK)
